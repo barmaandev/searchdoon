@@ -1,34 +1,34 @@
-.bwd-ppb-container p,
-.bwd-ppb-container h1,
-.bwd-ppb-container h2,
-.bwd-ppb-container h3,
-.bwd-ppb-container h4,
-.bwd-ppb-container h5,
-.bwd-ppb-container h6,
-.bwd-ppb-container span,
-.bwd-ppb-container a,
-.bwd-ppb-container p,
-.bwd-ppb-container a,
-.bwd-ppb-container button,
-.bwd-ppb-container input,
-.bwd-ppb-container textarea,
-.bwd-ppb-container select,
-.bwd-ppb-container option,
-.bwd-ppb-container label,
-.bwd-ppb-container th,
-.bwd-ppb-container td,
-.bwd-ppb-container tr,
-.bwd-ppb-container tbody,
-.bwd-ppb-container thead,
-.bwd-ppb-container tfoot
-.bwd-ppb-container table,
-.bwd-ppb-container form,
-.bwd-ppb-container input[type="text"],
-.bwd-ppb-container input[type="password"],
-.bwd-ppb-container input[type="email"],
-.bwd-ppb-container input[type="number"]
-{
-    font-family: 'Vazirmatn', sans-serif;
+.searchdoon-admin-wrap p,
+.searchdoon-admin-wrap h1,
+.searchdoon-admin-wrap h2,
+.searchdoon-admin-wrap h3,
+.searchdoon-admin-wrap h4,
+.searchdoon-admin-wrap h5,
+.searchdoon-admin-wrap h6,
+.searchdoon-admin-wrap span,
+.searchdoon-admin-wrap a,
+.searchdoon-admin-wrap p,
+.searchdoon-admin-wrap a,
+.searchdoon-admin-wrap button,
+.searchdoon-admin-wrap input,
+.searchdoon-admin-wrap textarea,
+.searchdoon-admin-wrap select,
+.searchdoon-admin-wrap option,
+.searchdoon-admin-wrap label,
+.searchdoon-admin-wrap th,
+.searchdoon-admin-wrap td,
+.searchdoon-admin-wrap tr,
+.searchdoon-admin-wrap tbody,
+.searchdoon-admin-wrap thead,
+.searchdoon-admin-wrap tfoot,
+.searchdoon-admin-wrap table,
+.searchdoon-admin-wrap form,
+.searchdoon-admin-wrap div,
+.searchdoon-admin-wrap input[type="text"],
+.searchdoon-admin-wrap input[type="password"],
+.searchdoon-admin-wrap input[type="email"],
+.searchdoon-admin-wrap input[type="number"] {
+font-family: 'Vazirmatn', sans-serif;
 }
 
 .bwd-ppb-main {
@@ -37,6 +37,7 @@
 }
 
 /* Card Layouts */
+.bwd-no-products,
 .bwd-status-card,
 .bwd-batch-card,
 .bwd-manual-card,
@@ -56,7 +57,6 @@
 .bwd-ppb-main h2 {
     color: #202224;
     font-size: 24px;
-    padding-bottom: 30px;
 }
 
 
@@ -148,7 +148,7 @@
 }
 
 /* Buttons */
-button{
+button {
     background-color: #4880FF !important;
     color: #fff !important;
     border: none !important;
@@ -158,11 +158,11 @@ button{
     transition: all 0.3s ease;
 }
 
-button:hover{
+button:hover {
     background-color: #3366CC !important;
 }
 
-button:active{
+button:active {
     background-color: #224499 !important;
 }
 
@@ -176,7 +176,7 @@ button:active{
     margin-left: 10px;
     padding: 10px 20px;
     font-size: 14px;
-    
+
     border-radius: 6px;
     transition: all 0.3s ease;
 }
@@ -219,7 +219,7 @@ button:active{
 }
 
 .bwd-manual-controls input:focus {
-    border-color: #0073aa;
+    border-color: #4880FF;
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 115, 170, .1);
 }
@@ -238,7 +238,7 @@ button:active{
 }
 
 .bwd-test-controls textarea:focus {
-    border-color: #0073aa;
+    border-color: #4880FF;
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 115, 170, .1);
 }
@@ -270,8 +270,6 @@ button:active{
 
 .bwd-status-message {
     font-size: 16px;
-    
-    margin-bottom: 10px;
 }
 
 .bwd-status-details {
@@ -560,7 +558,7 @@ button:active{
 
 .bwd-stat-label {
     font-size: 16px;
-    
+
     display: block;
     margin-top: 5px;
     color: #929394;
@@ -611,7 +609,7 @@ button:active{
 .bwd-test-result {
     margin-top: 15px;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 12px;
 }
 
 .bwd-batch-status {
@@ -684,9 +682,6 @@ button:active{
 
 .bwd-no-products {
     text-align: center;
-    padding: 30px;
-    background: #f9f9f9;
-    border-radius: 4px;
 }
 
 .bwd-no-products p {
@@ -731,6 +726,7 @@ button:active{
 .bwd-progress-value {
     color: #202224;
     font-weight: normal;
+    line-height: normal;
 }
 
 .bwd-table-error {

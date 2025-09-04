@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-class BWD_Normalizer_Service {
+class BWD_SearchDoon_Service {
 
     public function normalize_persian_text($text) {
         if (empty($text)) return '';

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Plugin Name: Persian Product Normalizer (Optimized)
- * Plugin URI: https://barmaan-shokoohi.com
- * Description: افزونه نرمالایز کردن نام و توضیحات محصولات فارسی و اضافه کردن فیلدهای متا - نسخه بهینه شده
- * Version: 1.3.0
+ * Plugin Name: SearchDoon
+ * Plugin URI: https://barmaan.dev
+ * Description: برای حل مشکلات جستجو در متن فارسی در وردپرس طراحی شده است. این افزونه مشکلات جستجو در متن فارسی را حل می‌کند و فیلدهای متا برای بهبود جستجو اضافه می‌کند.
+ * Version: 1.0.0
  * Author: Barmaan Shokoohi
- * Author URI: https://barmaan-shokoohi.com
- * Text Domain: persian-normalizer
+ * Author URI: https://barmaan.dev
+ * Text Domain: searchdoon
  * Domain Path: /languages
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -21,10 +21,10 @@ if (!defined('ABSPATH')) {
 // Define plugin constants
 define('BWD_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BWD_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('BWD_PLUGIN_VERSION', '1.3.0');
+define('BWD_PLUGIN_VERSION', '1.0.0');
 
 // Re-enable class includes (keep hooks disabled for now)
-require_once BWD_PLUGIN_PATH . 'includes/class-bwd-normalizer-service.php';
+require_once BWD_PLUGIN_PATH . 'includes/class-bwd-searchdoon-service.php';
 require_once BWD_PLUGIN_PATH . 'includes/class-bwd-database-manager.php';
 require_once BWD_PLUGIN_PATH . 'includes/class-bwd-batch-processor.php';
 require_once BWD_PLUGIN_PATH . 'includes/class-bwd-settings-manager.php';
@@ -32,20 +32,19 @@ require_once BWD_PLUGIN_PATH . 'includes/class-bwd-activator.php';
 require_once BWD_PLUGIN_PATH . 'includes/class-bwd-deactivator.php';
 // Load admin UI class only in admin to ensure callback exists
 if (is_admin()) {
-    require_once BWD_PLUGIN_PATH . 'admin/class-bargardoon-admin.php';
+    require_once BWD_PLUGIN_PATH . 'admin/class-searchdoon-admin.php';
 }
 
 // Main plugin class - Optimized Version
-class BWD_Persian_Product_Normalizer_Optimized
+class BWD_SearchDoon
 {
     private static $instance = null;
-    private $normalized_meta_key = '_normalized_product_data';
+    private $normalized_meta_key = '_searchdoon_data';
     private $batch_size = 50;
     private $is_processing = false;
-    private $normalizer_service;
+    private $searchdoon_service;
     private $database_manager;
     private $batch_processor;
-    private $search_enhancer;
     private $settings_manager;
     private $activator;
     private $deactivator;
@@ -56,7 +55,7 @@ class BWD_Persian_Product_Normalizer_Optimized
     public function __construct()
     {
         // MINIMAL MODE: Instantiate only the normalizer service for lightweight tests
-        $this->normalizer_service = new BWD_Normalizer_Service();
+        $this->searchdoon_service = new BWD_SearchDoon_Service();
         // Ensure DB table exists for logs and stats
         $this->database_manager = new BWD_Database_Manager();
         $this->batch_processor = new BWD_Batch_Processor($this);
@@ -158,7 +157,7 @@ class BWD_Persian_Product_Normalizer_Optimized
 
     public function enqueue_admin_scripts($hook)
     {
-        if ('tools_page_bwd-persian-normalizer' !== $hook) {
+        if ('tools_page_bwd-searchdoon' !== $hook) {
             return;
         }
 
@@ -226,10 +225,10 @@ class BWD_Persian_Product_Normalizer_Optimized
 
         // Normalize the data
         $normalized_data = array(
-            'title' => $this->normalizer_service->normalize_persian_text($product_title),
-            'content' => $this->normalizer_service->normalize_persian_text($product_content),
-            'excerpt' => $this->normalizer_service->normalize_persian_text($product_excerpt),
-            'search_keywords' => $this->normalizer_service->generate_search_keywords($product_title, $product_content),
+            'title' => $this->searchdoon_service->normalize_persian_text($product_title),
+            'content' => $this->searchdoon_service->normalize_persian_text($product_content),
+            'excerpt' => $this->searchdoon_service->normalize_persian_text($product_excerpt),
+            'search_keywords' => $this->searchdoon_service->generate_search_keywords($product_title, $product_content),
             'normalized_at' => current_time('mysql')
         );
 
@@ -337,7 +336,7 @@ class BWD_Persian_Product_Normalizer_Optimized
             wp_send_json_error('متنی برای نرمالایز کردن وارد نشده است');
         }
 
-        $normalized_text = $this->normalizer_service->normalize_persian_text($text);
+        $normalized_text = $this->searchdoon_service->normalize_persian_text($text);
 
         wp_send_json_success(array(
             'original_text' => $text,
@@ -618,13 +617,13 @@ class BWD_Persian_Product_Normalizer_Optimized
 // Initialize the plugin
 function bwd_init_optimized()
 {
-    return BWD_Persian_Product_Normalizer_Optimized::get_instance();
+    return BWD_SearchDoon::get_instance();
 }
 
 // Start the plugin
 add_action('plugins_loaded', 'bwd_init_optimized');
 
 // Backward compatibility: alias old class name to optimized class
-if (!class_exists('BWD_Persian_Product_Normalizer') && class_exists('BWD_Persian_Product_Normalizer_Optimized')) {
-    class_alias('BWD_Persian_Product_Normalizer_Optimized', 'BWD_Persian_Product_Normalizer');
+if (!class_exists('BWD_SearchDoon') && class_exists('BWD_SearchDoon_Optimized')) {
+    class_alias('BWD_SearchDoon_Optimized', 'BWD_SearchDoon');
 }

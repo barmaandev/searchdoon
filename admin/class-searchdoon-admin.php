@@ -6,10 +6,10 @@ if (!defined('ABSPATH')) {
 class BWD_Admin {
     public static function add_admin_menu() {
         add_management_page(
-            'نرمالایزر محصولات فارسی',
-            'نرمالایزر فارسی',
+            'سرچ‌دون',
+            'سرچ‌دون',
             'manage_options',
-            'bwd-persian-normalizer',
+            'bwd-searchdoon',
             array(self::class, 'admin_page')
         );
     }
@@ -36,6 +36,6 @@ class BWD_Admin {
             );
         }
 
-        include BWD_PLUGIN_PATH . 'admin/partials/bargardoon-admin-display.php';
+        include BWD_PLUGIN_PATH . 'admin/partials/searchdoon-admin-display.php';
     }
 }

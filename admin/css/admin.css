@@ -1,7 +1,39 @@
+.bwd-ppb-container p,
+.bwd-ppb-container h1,
+.bwd-ppb-container h2,
+.bwd-ppb-container h3,
+.bwd-ppb-container h4,
+.bwd-ppb-container h5,
+.bwd-ppb-container h6,
+.bwd-ppb-container span,
+.bwd-ppb-container a,
+.bwd-ppb-container p,
+.bwd-ppb-container a,
+.bwd-ppb-container button,
+.bwd-ppb-container input,
+.bwd-ppb-container textarea,
+.bwd-ppb-container select,
+.bwd-ppb-container option,
+.bwd-ppb-container label,
+.bwd-ppb-container th,
+.bwd-ppb-container td,
+.bwd-ppb-container tr,
+.bwd-ppb-container tbody,
+.bwd-ppb-container thead,
+.bwd-ppb-container tfoot
+.bwd-ppb-container table,
+.bwd-ppb-container form,
+.bwd-ppb-container input[type="text"],
+.bwd-ppb-container input[type="password"],
+.bwd-ppb-container input[type="email"],
+.bwd-ppb-container input[type="number"]
+{
+    font-family: 'Vazirmatn', sans-serif;
+}
+
 .bwd-ppb-main {
     direction: rtl;
     text-align: right;
-    font-family: 'Tahoma', 'Arial', sans-serif;
 }
 
 /* Card Layouts */
@@ -12,61 +44,43 @@
 .bwd-activity-card,
 .bwd-settings-card {
     background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
-    transition: box-shadow 0.3s ease;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 6px 6px 54px rgba(0, 0, 0, .05);
 }
 
-.bwd-status-card:hover,
-.bwd-batch-card:hover,
-.bwd-manual-card:hover,
-.bwd-test-card:hover,
-.bwd-activity-card:hover,
-.bwd-settings-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, .12);
-}
 
 /* Headers */
-.bwd-ppb-main h1 {
-    color: #23282d;
-    font-size: 28px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #0073aa;
-    padding-bottom: 15px;
+.bwd-ppb-main h1,
+.bwd-ppb-main h2 {
+    color: #202224;
+    font-size: 24px;
+    padding-bottom: 30px;
 }
 
-.bwd-ppb-main h2 {
-    color: #0073aa;
-    font-size: 20px;
-    margin-bottom: 15px;
-    border-right: 4px solid #0073aa;
-    padding-right: 15px;
-}
 
 /* Statistics Grid */
 .bwd-stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
+    gap: 30px;
     margin: 25px 0;
 }
 
 .bwd-stat-item {
     text-align: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+    background: #fff;
+    border-radius: 15px;
+    row-gap: 15px;
+    min-height: 120px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.bwd-stat-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
-}
 
 .bwd-stat-number {
     display: block;
@@ -81,7 +95,6 @@
     display: block;
     color: #6c757d;
     font-size: 14px;
-    font-weight: 500;
 }
 
 /* Progress Bar */
@@ -92,7 +105,7 @@
 .bwd-progress-bar {
     width: 100%;
     height: 25px;
-    background: #e9ecef;
+    background: #E9EFFC;
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 15px;
@@ -101,7 +114,7 @@
 
 .bwd-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #0073aa 0%, #005a87 50%, #004085 100%);
+    background: linear-gradient(90deg, #4393FF 0%, #4393FF 50%, #4393FF 100%);
     transition: width 0.5s ease;
     border-radius: 12px;
     position: relative;
@@ -132,10 +145,27 @@
     text-align: center;
     color: #6c757d;
     font-size: 16px;
-    font-weight: 500;
 }
 
 /* Buttons */
+button{
+    background-color: #4880FF !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    background-color: #3366CC !important;
+}
+
+button:active{
+    background-color: #224499 !important;
+}
+
 .bwd-batch-controls,
 .bwd-manual-controls {
     margin: 20px 0;
@@ -146,7 +176,7 @@
     margin-left: 10px;
     padding: 10px 20px;
     font-size: 14px;
-    font-weight: 500;
+    
     border-radius: 6px;
     transition: all 0.3s ease;
 }
@@ -240,7 +270,7 @@
 
 .bwd-status-message {
     font-size: 16px;
-    font-weight: 500;
+    
     margin-bottom: 10px;
 }
 
@@ -260,7 +290,7 @@
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 12px 15px;
     text-align: right;
-    font-weight: 600;
+    font-weight: 700;
     color: #495057;
     border-bottom: 2px solid #dee2e6;
 }
@@ -280,7 +310,7 @@
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -300,7 +330,7 @@
     background: #f8f9fa;
     padding: 15px;
     border-radius: 6px;
-    font-family: 'Courier New', monospace;
+    /* font-family: 'Courier New', monospace; */
     font-size: 14px;
     line-height: 1.6;
     white-space: pre-wrap;
@@ -313,7 +343,7 @@
 .bwd-settings-card .form-table th {
     padding: 15px 10px 15px 0;
     width: 200px;
-    font-weight: 600;
+    font-weight: 700;
     color: #495057;
 }
 
@@ -354,7 +384,7 @@
 
 .bwd-normalized-data strong {
     color: #0073aa;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* Responsive Design */
@@ -501,29 +531,17 @@
 .bwd-ppn-sidebar {
     width: 20%;
     background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-    padding: 20px;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 6px 6px 54px rgba(0, 0, 0, .05);
 }
 
 .bwd-ppn-sidebar p {
     font-size: 14px;
-    color: #666;
+    color: #202224;
 }
 
-.bwd-status-card,
-.bwd-batch-card,
-.bwd-manual-card,
-.bwd-test-card,
-.bwd-activity-card,
-.bwd-settings-card {
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
-}
 
 .bwd-stats-grid {
     display: grid;
@@ -532,24 +550,20 @@
     margin: 20px 0;
 }
 
-.bwd-stat-item {
-    text-align: center;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 4px;
-}
 
 .bwd-stat-number {
     display: block;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    color: #0073aa;
+    color: #202224;
 }
 
 .bwd-stat-label {
+    font-size: 16px;
+    
     display: block;
     margin-top: 5px;
-    color: #666;
+    color: #929394;
 }
 
 .bwd-progress-container {
@@ -664,7 +678,7 @@
     background: #f9f9f9;
     padding: 10px;
     border-radius: 3px;
-    font-family: monospace;
+    /* font-family: monospace; */
     white-space: pre-wrap;
 }
 
@@ -686,22 +700,22 @@
 
 .bwd-stats-actions {
     margin-top: 20px;
-    text-align: center;
+    text-align: left;
 }
 
 .bwd-progress-details {
     margin: 20px 0;
-    padding: 15px;
+    padding: 0 15px;
     background: #f9f9f9;
-    border-radius: 4px;
-    border-left: 4px solid #0073aa;
+    border-radius: 15px;
 }
 
 .bwd-progress-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 20px 0;
+    font-size: 14px;
     border-bottom: 1px solid #eee;
 }
 
@@ -711,12 +725,12 @@
 
 .bwd-progress-label {
     font-weight: bold;
-    color: #333;
+    color: #202224;
 }
 
 .bwd-progress-value {
-    color: #0073aa;
-    font-weight: bold;
+    color: #202224;
+    font-weight: normal;
 }
 
 .bwd-table-error {

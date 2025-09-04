@@ -168,7 +168,12 @@ class BWD_SearchDoon
             BWD_PLUGIN_VERSION,
             true
         );
-
+        wp_enqueue_style(
+            'bwd-admin-fonts',
+            BWD_PLUGIN_URL . 'admin/css/fonts.css',
+            array(),
+            BWD_PLUGIN_VERSION
+        );
         wp_enqueue_style(
             'bwd-admin-css',
             BWD_PLUGIN_URL . 'admin/css/admin.css',

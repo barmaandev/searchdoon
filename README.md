@@ -1,116 +1,12 @@
 # searchdoon
 
-<div dir="rtl" style="font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif; line-height: 1.8; text-align: right;">
+<div dir="rtl">
 
 این افزونه برای نرمالایز کردن نام و توضیحات محصولات فارسی در وردپرس طراحی شده است. این افزونه مشکلات جستجو در متن فارسی را حل می‌کند و فیلدهای متا برای بهبود جستجو اضافه می‌کند.
 
 **توسعه‌دهنده:** Barmaan Shokoohi
 
 </div>
-
-<style>
-/* فونت‌های فارسی برای بهبود خوانایی */
-body {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-    line-height: 1.8;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-}
-
-p, li, div {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-    line-height: 1.8;
-}
-
-code {
-    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
-    direction: ltr;
-    text-align: left;
-    background-color: #f6f8fa;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.9em;
-}
-
-pre {
-    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
-    direction: ltr;
-    text-align: left;
-    background-color: #f6f8fa;
-    padding: 16px;
-    border-radius: 6px;
-    overflow-x: auto;
-}
-
-blockquote {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-    border-right: 4px solid #dfe2e5;
-    padding-right: 16px;
-    margin-right: 0;
-    color: #6a737d;
-}
-
-/* بهبود نمایش لیست‌ها */
-ul, ol {
-    direction: rtl;
-    text-align: right;
-    padding-right: 20px;
-}
-
-li {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-    margin-bottom: 8px;
-}
-
-/* بهبود نمایش جداول */
-table {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
-    direction: rtl;
-    text-align: right;
-    padding: 12px;
-    border: 1px solid #dfe2e5;
-}
-
-th {
-    background-color: #f6f8fa;
-    font-weight: bold;
-}
-
-/* بهبود نمایش لینک‌ها */
-a {
-    color: #0366d6;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* بهبود نمایش اموجی‌ها */
-.emoji {
-    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
-}
-</style>
 
 ## ویژگی‌ها
 

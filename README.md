@@ -1,8 +1,116 @@
 # searchdoon
+
+<div dir="rtl" style="font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif; line-height: 1.8; text-align: right;">
+
 این افزونه برای نرمالایز کردن نام و توضیحات محصولات فارسی در وردپرس طراحی شده است. این افزونه مشکلات جستجو در متن فارسی را حل می‌کند و فیلدهای متا برای بهبود جستجو اضافه می‌کند.
 
-
 **توسعه‌دهنده:** Barmaan Shokoohi
+
+</div>
+
+<style>
+/* فونت‌های فارسی برای بهبود خوانایی */
+body {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+}
+
+p, li, div {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+}
+
+code {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
+    direction: ltr;
+    text-align: left;
+    background-color: #f6f8fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre {
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
+    direction: ltr;
+    text-align: left;
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+blockquote {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    border-right: 4px solid #dfe2e5;
+    padding-right: 16px;
+    margin-right: 0;
+    color: #6a737d;
+}
+
+/* بهبود نمایش لیست‌ها */
+ul, ol {
+    direction: rtl;
+    text-align: right;
+    padding-right: 20px;
+}
+
+li {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+/* بهبود نمایش جداول */
+table {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    font-family: 'Vazir', 'Tahoma', 'Arial', sans-serif !important;
+    direction: rtl;
+    text-align: right;
+    padding: 12px;
+    border: 1px solid #dfe2e5;
+}
+
+th {
+    background-color: #f6f8fa;
+    font-weight: bold;
+}
+
+/* بهبود نمایش لینک‌ها */
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* بهبود نمایش اموجی‌ها */
+.emoji {
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+}
+</style>
 
 ## ویژگی‌ها
 
@@ -47,7 +155,124 @@
 2. پیشرفت را مشاهده کنید
 3. منتظر تکمیل پردازش بمانید
 
+## نرمالایز کردن چیست؟
+
+**نرمالایز کردن** در این افزونه به معنای تبدیل متن فارسی به فرم استاندارد و قابل جستجو است. این فرآیند شامل:
+
+- **تبدیل کاراکترهای عربی به فارسی**: تبدیل حروف عربی (ي، ك، ة) به معادل فارسی (ی، ک، ه)
+- **یکسان‌سازی فاصله‌ها**: حذف فاصله‌های اضافی و تبدیل انواع مختلف فاصله به فاصله استاندارد
+- **حذف کلمات اضافی**: حذف کلمات توقف (stopwords) که در جستجو مفید نیستند
+- **تولید کلمات کلیدی**: ایجاد کلمات کلیدی بهینه برای جستجو
+
+### چرا نرمالایز کردن مهم است؟
+
+در زبان فارسی، یک کلمه ممکن است به شکل‌های مختلف نوشته شود:
+- "مردک" یا "مردك" (ک عربی یا فارسی)
+- "خانه" یا "خانه‌" (با یا بدون نیم‌فاصله)
+- "یادگیری" یا "يادگيري" (ی عربی یا فارسی)
+
+نرمالایز کردن این تفاوت‌ها را برطرف کرده و جستجو را دقیق‌تر می‌کند.
+
 ## نحوه استفاده
+
+### کلید متا برای داده‌های نرمالایز شده
+
+داده‌های نرمالایز شده در کلید متای زیر ذخیره می‌شوند:
+
+```php
+$meta_key = '_searchdoon_data';
+```
+
+### ساختار داده‌های نرمالایز شده
+
+```php
+$normalized_data = array(
+    'title' => 'عنوان نرمالایز شده محصول',
+    'content' => 'محتوای نرمالایز شده محصول', 
+    'excerpt' => 'خلاصه نرمالایز شده محصول',
+    'search_keywords' => 'کلمات کلیدی تولید شده برای جستجو',
+    'normalized_at' => '2024-01-01 12:00:00'
+);
+```
+
+### نمونه کوئری‌های جستجو
+
+#### جستجو در عنوان نرمالایز شده
+```php
+$args = array(
+    'post_type' => 'product',
+    'meta_query' => array(
+        array(
+            'key' => '_searchdoon_data',
+            'value' => 'کلمه جستجو',
+            'compare' => 'LIKE'
+        )
+    )
+);
+$products = get_posts($args);
+```
+
+#### جستجو در کلمات کلیدی
+```php
+$args = array(
+    'post_type' => 'product',
+    'meta_query' => array(
+        array(
+            'key' => '_searchdoon_data',
+            'value' => 'کلمه کلیدی',
+            'compare' => 'LIKE'
+        )
+    )
+);
+$products = get_posts($args);
+```
+
+#### جستجو پیشرفته با چندین فیلد
+```php
+$search_term = 'کلمه جستجو';
+$args = array(
+    'post_type' => 'product',
+    'meta_query' => array(
+        'relation' => 'OR',
+        array(
+            'key' => '_searchdoon_data',
+            'value' => $search_term,
+            'compare' => 'LIKE'
+        ),
+        array(
+            'key' => '_searchdoon_data',
+            'value' => $search_term,
+            'compare' => 'LIKE'
+        )
+    )
+);
+$products = get_posts($args);
+```
+
+#### جستجو با استفاده از WP_Query
+```php
+$query = new WP_Query(array(
+    'post_type' => 'product',
+    'meta_query' => array(
+        array(
+            'key' => '_searchdoon_data',
+            'value' => 'کلمه جستجو',
+            'compare' => 'LIKE'
+        )
+    ),
+    'posts_per_page' => 10,
+    'orderby' => 'date',
+    'order' => 'DESC'
+));
+
+if ($query->have_posts()) {
+    while ($query->have_posts()) {
+        $query->the_post();
+        // نمایش محصول
+    }
+    wp_reset_postdata();
+}
+```
 
 ### پردازش دسته‌ای
 ```php
@@ -65,7 +290,7 @@ $normalized_text = $normalizer->normalize_persian_text($text);
 ### دریافت داده‌های نرمالایز شده
 ```php
 // دریافت داده‌های نرمالایز شده محصول
-$normalized_data = get_post_meta($product_id, '_normalized_product_data', true);
+$normalized_data = get_post_meta($product_id, '_searchdoon_data', true);
 ```
 
 ## ساختار فایل‌ها

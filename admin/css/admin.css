@@ -1,33 +1,33 @@
-.searchdoon-admin-wrap p,
-.searchdoon-admin-wrap h1,
-.searchdoon-admin-wrap h2,
-.searchdoon-admin-wrap h3,
-.searchdoon-admin-wrap h4,
-.searchdoon-admin-wrap h5,
-.searchdoon-admin-wrap h6,
-.searchdoon-admin-wrap span,
-.searchdoon-admin-wrap a,
-.searchdoon-admin-wrap p,
-.searchdoon-admin-wrap a,
-.searchdoon-admin-wrap button,
-.searchdoon-admin-wrap input,
-.searchdoon-admin-wrap textarea,
-.searchdoon-admin-wrap select,
-.searchdoon-admin-wrap option,
-.searchdoon-admin-wrap label,
-.searchdoon-admin-wrap th,
-.searchdoon-admin-wrap td,
-.searchdoon-admin-wrap tr,
-.searchdoon-admin-wrap tbody,
-.searchdoon-admin-wrap thead,
-.searchdoon-admin-wrap tfoot,
-.searchdoon-admin-wrap table,
-.searchdoon-admin-wrap form,
-.searchdoon-admin-wrap div,
-.searchdoon-admin-wrap input[type="text"],
-.searchdoon-admin-wrap input[type="password"],
-.searchdoon-admin-wrap input[type="email"],
-.searchdoon-admin-wrap input[type="number"] {
+.wbdn-wrapper p,
+.wbdn-wrapper h1,
+.wbdn-wrapper h2,
+.wbdn-wrapper h3,
+.wbdn-wrapper h4,
+.wbdn-wrapper h5,
+.wbdn-wrapper h6,
+.wbdn-wrapper span,
+.wbdn-wrapper a,
+.wbdn-wrapper p,
+.wbdn-wrapper a,
+.wbdn-wrapper button,
+.wbdn-wrapper input,
+.wbdn-wrapper textarea,
+.wbdn-wrapper select,
+.wbdn-wrapper option,
+.wbdn-wrapper label,
+.wbdn-wrapper th,
+.wbdn-wrapper td,
+.wbdn-wrapper tr,
+.wbdn-wrapper tbody,
+.wbdn-wrapper thead,
+.wbdn-wrapper tfoot,
+.wbdn-wrapper table,
+.wbdn-wrapper form,
+.wbdn-wrapper div,
+.wbdn-wrapper input[type="text"],
+.wbdn-wrapper input[type="password"],
+.wbdn-wrapper input[type="email"],
+.wbdn-wrapper input[type="number"] {
 font-family: 'Vazirmatn', sans-serif;
 }
 
@@ -37,13 +37,7 @@ font-family: 'Vazirmatn', sans-serif;
 }
 
 /* Card Layouts */
-.bwd-no-products,
-.bwd-status-card,
-.bwd-batch-card,
-.bwd-manual-card,
-.bwd-test-card,
-.bwd-activity-card,
-.bwd-settings-card {
+.wbdn-wrapper .wbdn-section-box{
     background: #fff;
     padding: 30px;
     border-radius: 15px;

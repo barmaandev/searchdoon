@@ -1,4 +1,4 @@
-<div class="wrap searchdoon-admin-wrap">
+<div class="wrap wbdn-wrapper">
     <h1>سرچ‌دون، نورمالایزر متن فارسی</h1>
 
     <?php if (!$table_exists): ?>
@@ -26,11 +26,11 @@
 
             <h2>وضعیت کلی</h2>
             <?php if (!$table_exists): ?>
-                <div class="bwd-table-error">
+                <div class="wbdn-section-box bwd-table-error">
                     <p>جدول پیشرفت موجود نیست. آمار قابل نمایش نیست.</p>
                 </div>
             <?php elseif ($total_products == 0): ?>
-                <div class="bwd-no-products">
+                <div class="wbdn-section-box bwd-no-products">
                     <p>هنوز محصولی در سایت وجود ندارد یا شمارش نشده است.</p>
                     <button type="button" id="bwd-count-products" class="button button-secondary">
                         شمارش محصولات
@@ -55,7 +55,7 @@
                         <span class="bwd-stat-label">پیشرفت</span>
                     </div>
                 </div>
-                <div class="bwd-status-card">
+                <div class="wbdn-section-box bwd-status-card">
                     <!-- Progress Bar -->
                     <div class="bwd-progress-container">
                         <div class="bwd-progress-bar">
@@ -76,7 +76,14 @@
                         </div>
                         <div class="bwd-progress-item">
                             <span class="bwd-progress-label">آخرین بروزرسانی:</span>
-                            <span class="bwd-progress-value"><?php echo get_option('bwd_last_update', 'نامشخص'); ?></span>
+                            <span class="bwd-progress-value"><?php 
+                                $last_update = get_option('bwd_last_update', 'نامشخص');
+                                if (is_numeric($last_update)) {
+                                    echo date('Y-m-d H:i:s', $last_update);
+                                } else {
+                                    echo $last_update;
+                                }
+                            ?></span>
                         </div>
                     </div>
 
@@ -93,7 +100,7 @@
 
 
             <!-- Batch Processing -->
-            <div class="bwd-batch-card">
+            <div class="wbdn-section-box bwd-batch-card">
                 <h2>پردازش دسته‌ای محصولات</h2>
                 <p>این عملیات تمام محصولات موجود را نرمالایز می‌کند و فیلدهای متا را اضافه می‌کند.</p>
 
@@ -113,7 +120,7 @@
             </div>
 
             <!-- Manual Normalization -->
-            <div class="bwd-manual-card">
+            <div class="wbdn-section-box bwd-manual-card">
                 <h2>نرمالایز کردن دستی</h2>
                 <p>برای نرمالایز کردن یک محصول خاص، شناسه محصول را وارد کنید:</p>
 
@@ -130,7 +137,7 @@
             </div>
 
             <!-- Test Normalization -->
-            <div class="bwd-test-card">
+            <div class="wbdn-section-box bwd-test-card">
                 <h2>تست نرمالایز کردن</h2>
                 <p>متن فارسی خود را وارد کنید تا نتیجه نرمالایز شدن را ببینید(این متنی هست که در ستون مجزایی از نام محصول در دیتابیس شما ذخیره میشود.):</p>
 
@@ -148,7 +155,7 @@
             </div>
 
             <!-- Recent Activity -->
-            <div class="bwd-activity-card">
+            <div class="wbdn-section-box bwd-activity-card">
                 <h2>فعالیت‌های اخیر</h2>
                 <p>این بخش صرفا جهت بررسی روند نورمالایز هست و این فعالیت‌ها در جدولی جداگانه ذخیره میشود. پیشنهاد میشود جهت سنگین نشدن دیتابیس، بعد از اتمام کار لاگ ها را پاک کنید.</p>
                 <?php if (!$table_exists): ?>
@@ -271,7 +278,7 @@
 
 
             <!-- Settings -->
-            <div class="bwd-settings-card">
+            <div class=wbdn-section-box "bwd-settings-card">
                 <h2>تنظیمات</h2>
                 <form id="bwd-settings-form">
                     <table class="form-table">
@@ -378,7 +385,7 @@
             </div>
 
         </div>
-        <div class="bwd-ppn-sidebar">
+        <div class="wbdn-section-box bwd-ppn-sidebar">
             <p>
                 این پلاگین توسط من، بارمان شکوهی ساخته شده و به رایگان در مخزن وردپرس قرار گرفته.
                 اگر این پلاگین برای شما مفید بوده میتونید از طریق لینک زیر ازم حمایت کنید.

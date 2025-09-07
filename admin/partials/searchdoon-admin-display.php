@@ -25,6 +25,9 @@
             <!-- Tab Navigation -->
             <div class="wbdn-tab-wrapper">
                 <a class="wbdn-tab-nav-btn active" data-tab="status">وضعیت کلی</a>
+                <a class="wbdn-tab-nav-btn" data-tab="manual">نرمالایز کردن دستی</a>
+                <a class="wbdn-tab-nav-btn" data-tab="settings">تنظیمات</a>
+                <a class="wbdn-tab-nav-btn" data-tab="activity">فعالیت‌های اخیر</a>
                 <a class="wbdn-tab-nav-btn" data-tab="guide">راهنما</a>
             </div>
 
@@ -124,9 +127,15 @@
                     </div>
                 </div>
 
+                <!-- End Status Tab Content -->
+            </div>
+
+            <!-- Manual Normalization Tab Content -->
+            <div id="wbdn-tab-manual" class="wbdn-tab-content">
+                
                 <!-- Manual Normalization -->
                 <div class="wbdn-section-box bwd-manual-card">
-                    <h2>نرمالایز کردن دستی</h2>
+                    <h3>نرمالایز کردن محصول خاص</h3>
                     <p>برای نرمالایز کردن یک محصول خاص، شناسه محصول را وارد کنید:</p>
 
                     <div class="bwd-manual-controls">
@@ -140,10 +149,14 @@
                         <div class="bwd-status-message"></div>
                     </div>
                 </div>
+            </div>
 
+            <!-- Settings Tab Content -->
+            <div id="wbdn-tab-settings" class="wbdn-tab-content">
+                
                 <!-- Test Normalization -->
                 <div class="wbdn-section-box bwd-test-card">
-                    <h2>تست نرمالایز کردن</h2>
+                    <h3>تست نرمالایز کردن</h3>
                     <p>متن فارسی خود را وارد کنید تا نتیجه نرمالایز شدن را ببینید(این متنی هست که در ستون مجزایی از نام محصول در دیتابیس شما ذخیره میشود.):</p>
 
                     <div class="bwd-test-controls">
@@ -159,9 +172,118 @@
                     </div>
                 </div>
 
+                <!-- Settings -->
+                <div class="wbdn-section-box bwd-settings-card">
+                    <h3>تنظیمات پلاگین</h3>
+                    <form id="bwd-settings-form">
+                        <table class="form-table">
+                            <tr>
+                                <th scope="row">
+                                    <label for="bwd-batch-size">سایز بچ(اندازه دسته پردازش)</label>
+                                </th>
+                                <td>
+                                    <input type="number" id="bwd-batch-size" name="batch_size"
+                                        value="<?php echo esc_attr(get_option('bwd_batch_size', 50)); ?>"
+                                        min="10" max="200">
+                                    <p class="description">تعداد محصولاتی که در هر مرحله پردازش می‌شوند (پیشنهاد: 50)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <label for="bwd-remove-stopwords">حذف کلمات اضافی</label>
+                                </th>
+                                <td>
+                                    <input type="checkbox" id="bwd-remove-stopwords" name="remove_stopwords"
+                                        <?php echo get_option('bwd_remove_stopwords', true) ? 'checked="checked"' : ''; ?>>
+                                    <label for="bwd-remove-stopwords">کلمات اضافی فارسی را حذف کن</label>
+                                    <p class="description">حالت فعلی: <?php echo get_option('bwd_remove_stopwords', true) ? 'فعال' : 'غیرفعال'; ?>
+                                        <br>
+                                        کلمات اضافی فارسی عبارتند از:
+                                        <?php
+                                        $stopwords = array(
+                                            'از',
+                                            'به',
+                                            'در',
+                                            'با',
+                                            'برای',
+                                            'که',
+                                            'این',
+                                            'آن',
+                                            'را',
+                                            'و',
+                                            'یا',
+                                            'هم',
+                                            'نیز',
+                                            'همچنین',
+                                            'همچنین',
+                                            'همچنین',
+                                            'همچنین',
+                                            'همچنین',
+                                            'اما',
+                                            'ولی',
+                                            'اگر',
+                                            'چون',
+                                            'زیرا',
+                                            'بنابراین',
+                                            'پس',
+                                            'قبل',
+                                            'بعد',
+                                            'بالا',
+                                            'پایین',
+                                            'چپ',
+                                            'راست',
+                                            'وسط',
+                                            'کنار',
+                                            'روبرو'
+                                        );
+                                        $stopwords = apply_filters('bwd_stopwords', $stopwords);
+                                        echo implode(', ', $stopwords);
+                                        ?>
+                                        <br>
+                                        که
+                                        جهت بهینه سازی روند ذخیره سازی و جلوگیری از سنگین شدن دیتابیس میتونید این گزینه را فعال کنید.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <label for="bwd-reprocess-existing">پردازش مجدد محصولات موجود</label>
+                                </th>
+                                <td>
+                                    <input type="checkbox" id="bwd-reprocess-existing" name="reprocess_existing"
+                                        <?php echo get_option('bwd_reprocess_existing', false) ? 'checked="checked"' : ''; ?>>
+                                    <label for="bwd-reprocess-existing">محصولاتی که قبلاً نرمالایز شده‌اند را دوباره پردازش کن</label>
+                                    <p class="description">حالت فعلی: <?php echo get_option('bwd_reprocess_existing', false) ? 'فعال' : 'غیرفعال'; ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <label for="bwd-auto-normalize">نرمالایز خودکار</label>
+                                </th>
+                                <td>
+                                    <input type="checkbox" id="bwd-auto-normalize" name="auto_normalize"
+                                        <?php echo get_option('bwd_auto_normalize', true) ? 'checked="checked"' : ''; ?>>
+                                    <label for="bwd-auto-normalize">محصولات جدید را به صورت خودکار نرمالایز کن</label>
+                                    <p class="description">حالت فعلی: <?php echo get_option('bwd_auto_normalize', true) ? 'فعال' : 'غیرفعال'; ?></p>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <button type="submit" class="button button-primary">ذخیره تنظیمات</button>
+                        <button type="button" id="bwd-test-settings" class="button button-secondary">تست تنظیمات فعلی</button>
+                        <div id="bwd-settings-status" class="bwd-settings-status" style="display: none;">
+                            <div class="bwd-status-message"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent Activity Tab Content -->
+            <div id="wbdn-tab-activity" class="wbdn-tab-content">
+                
                 <!-- Recent Activity -->
                 <div class="wbdn-section-box bwd-activity-card">
-                    <h2>فعالیت‌های اخیر</h2>
+                    <h3>لاگ فعالیت‌ها</h3>
                     <p>این بخش صرفا جهت بررسی روند نورمالایز هست و این فعالیت‌ها در جدولی جداگانه ذخیره میشود. پیشنهاد میشود جهت سنگین نشدن دیتابیس، بعد از اتمام کار لاگ ها را پاک کنید.</p>
                     <?php if (!$table_exists): ?>
                         <div class="bwd-table-error">
@@ -280,119 +402,14 @@
                         </div>
                     <?php endif; ?>
                 </div>
-
-
-                <!-- Settings -->
-                <div class="wbdn-section-box bwd-settings-card">
-                    <h2>تنظیمات</h2>
-                    <form id="bwd-settings-form">
-                        <table class="form-table">
-                            <tr>
-                                <th scope="row">
-                                    <label for="bwd-batch-size">سایز بچ(اندازه دسته پردازش)</label>
-                                </th>
-                                <td>
-                                    <input type="number" id="bwd-batch-size" name="batch_size"
-                                        value="<?php echo esc_attr(get_option('bwd_batch_size', 50)); ?>"
-                                        min="10" max="200">
-                                    <p class="description">تعداد محصولاتی که در هر مرحله پردازش می‌شوند (پیشنهاد: 50)</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <label for="bwd-remove-stopwords">حذف کلمات اضافی</label>
-                                </th>
-                                <td>
-                                    <input type="checkbox" id="bwd-remove-stopwords" name="remove_stopwords"
-                                        <?php echo get_option('bwd_remove_stopwords', true) ? 'checked="checked"' : ''; ?>>
-                                    <label for="bwd-remove-stopwords">کلمات اضافی فارسی را حذف کن</label>
-                                    <p class="description">حالت فعلی: <?php echo get_option('bwd_remove_stopwords', true) ? 'فعال' : 'غیرفعال'; ?>
-                                        <br>
-                                        کلمات اضافی فارسی عبارتند از:
-                                        <?php
-                                        $stopwords = array(
-                                            'از',
-                                            'به',
-                                            'در',
-                                            'با',
-                                            'برای',
-                                            'که',
-                                            'این',
-                                            'آن',
-                                            'را',
-                                            'و',
-                                            'یا',
-                                            'هم',
-                                            'نیز',
-                                            'همچنین',
-                                            'همچنین',
-                                            'همچنین',
-                                            'همچنین',
-                                            'همچنین',
-                                            'اما',
-                                            'ولی',
-                                            'اگر',
-                                            'چون',
-                                            'زیرا',
-                                            'بنابراین',
-                                            'پس',
-                                            'قبل',
-                                            'بعد',
-                                            'بالا',
-                                            'پایین',
-                                            'چپ',
-                                            'راست',
-                                            'وسط',
-                                            'کنار',
-                                            'روبرو'
-                                        );
-                                        $stopwords = apply_filters('bwd_stopwords', $stopwords);
-                                        echo implode(', ', $stopwords);
-                                        ?>
-                                        <br>
-                                        که
-                                        جهت بهینه سازی روند ذخیره سازی و جلوگیری از سنگین شدن دیتابیس میتونید این گزینه را فعال کنید.
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <label for="bwd-reprocess-existing">پردازش مجدد محصولات موجود</label>
-                                </th>
-                                <td>
-                                    <input type="checkbox" id="bwd-reprocess-existing" name="reprocess_existing"
-                                        <?php echo get_option('bwd_reprocess_existing', false) ? 'checked="checked"' : ''; ?>>
-                                    <label for="bwd-reprocess-existing">محصولاتی که قبلاً نرمالایز شده‌اند را دوباره پردازش کن</label>
-                                    <p class="description">حالت فعلی: <?php echo get_option('bwd_reprocess_existing', false) ? 'فعال' : 'غیرفعال'; ?></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <label for="bwd-auto-normalize">نرمالایز خودکار</label>
-                                </th>
-                                <td>
-                                    <input type="checkbox" id="bwd-auto-normalize" name="auto_normalize"
-                                        <?php echo get_option('bwd_auto_normalize', true) ? 'checked="checked"' : ''; ?>>
-                                    <label for="bwd-auto-normalize">محصولات جدید را به صورت خودکار نرمالایز کن</label>
-                                    <p class="description">حالت فعلی: <?php echo get_option('bwd_auto_normalize', true) ? 'فعال' : 'غیرفعال'; ?></p>
-                                </td>
-                            </tr>
-
-                        </table>
-                        <button type="submit" class="button button-primary">ذخیره تنظیمات</button>
-                        <button type="button" id="bwd-test-settings" class="button button-secondary">تست تنظیمات فعلی</button>
-                        <div id="bwd-settings-status" class="bwd-settings-status" style="display: none;">
-                            <div class="bwd-status-message"></div>
-                        </div>
-                    </form>
-                </div>
-                <!-- End Status Tab Content -->
             </div>
+
             <!-- Guide Tab Content -->
             <div id="wbdn-tab-guide" class="wbdn-tab-content">
-                <h2>راهنمای استفاده از پلاگین سرچ‌دون</h2>
 
                 <div class="wbdn-section-box bwd-guide-card">
+                    <h2>راهنمای استفاده از پلاگین سرچ‌دون</h2>
+
                     <h3>نحوه استفاده در کوئری‌های جستجو</h3>
                     <p>این پلاگین متن‌های فارسی را نرمالایز می‌کند تا جستجو بهتر کار کند. در ادامه مثال‌هایی از نحوه استفاده آورده شده است:</p>
 
@@ -403,23 +420,37 @@
                                 <span>کد PHP</span>
                                 <button class="bwd-copy-btn" data-copy="wp_query_example">کپی</button>
                             </div>
-                            <pre>
-                                    <code id="wp_query_example">
-                                        // جستجوی محصولات با نام فارسی
-                                        $args = array(
-                                            'post_type' => 'product',
-                                            's' => 'گوشی موبایل', // متن فارسی
-                                            'meta_query' => array(
-                                                array(
-                                                    'key' => 'bwd_normalized_title',
-                                                    'value' => 'گوشی موبایل',
-                                                    'compare' => 'LIKE'
-                                                )
-                                            )
-                                        );
-                                        $products = new WP_Query($args);
-                                    </code>
-                                </pre>
+                            <pre><code id="wp_query_example">&lt;?php
+/**
+ * جستجوی محصولات با نام فارسی
+ * Search products with Persian names
+ */
+
+$args = array(
+    'post_type' => 'product',
+    's' => 'گوشی موبایل', // متن فارسی
+    'meta_query' => array(
+        array(
+            'key' => 'bwd_normalized_title',
+            'value' => 'گوشی موبایل',
+            'compare' => 'LIKE'
+        )
+    )
+);
+
+$products = new WP_Query($args);
+
+// نمایش نتایج
+if ($products->have_posts()) {
+    while ($products->have_posts()) {
+        $products->the_post();
+        echo '<h3>' . get_the_title() . '</h3>';
+    }
+    wp_reset_postdata();
+} else {
+    echo 'محصولی یافت نشد';
+}
+?&gt;</code></pre>
                         </div>
                     </div>
 
@@ -430,14 +461,18 @@
                                 <span>کد PHP</span>
                                 <button class="bwd-copy-btn" data-copy="advanced_search_example">کپی</button>
                             </div>
-                            <pre>
-                                <code id="advanced_search_example">
-                                    // جستجوی پیشرفته در عنوان و توضیحات
+                            <pre><code id="advanced_search_example">&lt;?php
+/**
+ * جستجوی پیشرفته در عنوان و توضیحات
+ * Advanced search in title and content
+ */
+
 $search_term = 'لپ تاپ';
 $normalized_term = bwd_normalize_text($search_term);
 
 $args = array(
     'post_type' => 'product',
+    'posts_per_page' => 10,
     'meta_query' => array(
         'relation' => 'OR',
         array(
@@ -452,9 +487,25 @@ $args = array(
         )
     )
 );
+
 $products = new WP_Query($args);
-</code>
-</pre>
+
+// بررسی نتایج
+if ($products->found_posts > 0) {
+    echo 'تعداد نتایج: ' . $products->found_posts;
+    
+    while ($products->have_posts()) {
+        $products->the_post();
+        echo '<div class="product-result">';
+        echo '<h3>' . get_the_title() . '</h3>';
+        echo '<p>' . wp_trim_words(get_the_content(), 20) . '</p>';
+        echo '</div>';
+    }
+    wp_reset_postdata();
+} else {
+    echo 'هیچ محصولی یافت نشد';
+}
+?&gt;</code></pre>
                         </div>
                     </div>
                     <div class="bwd-example-section">
@@ -464,24 +515,98 @@ $products = new WP_Query($args);
                                 <span>کد JavaScript</span>
                                 <button class="bwd-copy-btn" data-copy="ajax_search_example">کپی</button>
                             </div>
-                            <pre><code id="ajax_search_example">// جستجوی AJAX
+                            <pre><code id="ajax_search_example">/**
+ * جستجوی AJAX با سرچ‌دون
+ * AJAX Search with SearchDoon
+ * 
+ * نکته: این کد نمونه است و نیاز به پیاده‌سازی سمت سرور دارد
+ * Note: This is example code and requires server-side implementation
+ */
+
 jQuery(document).ready(function($) {
+    let searchTimeout;
+    
+    // جستجو با تاخیر (debounce)
     $('#search-input').on('input', function() {
-        var searchTerm = $(this).val();
+        const searchTerm = $(this).val().trim();
         
+        clearTimeout(searchTimeout);
+        
+        // نمایش حالت بارگذاری
+        $('#search-results').html('&lt;div class="loading"&gt;در حال جستجو...&lt;/div&gt;');
+        
+        // تاخیر 300 میلی‌ثانیه بعد از توقف تایپ
+        searchTimeout = setTimeout(function() {
+            if (searchTerm.length >= 2) {
+                performSearch(searchTerm);
+            } else {
+                $('#search-results').html('');
+            }
+        }, 300);
+    });
+    
+    function performSearch(term) {
         $.ajax({
-            url: ajaxurl,
+            url: ajaxurl, // متغیر WordPress
             type: 'POST',
             data: {
-                action: 'bwd_ajax_search',
-                search_term: searchTerm
+                action: 'bwd_ajax_search', // نام action
+                search_term: term,
+                nonce: bwd_ajax.nonce // امنیت
             },
             success: function(response) {
-                $('#search-results').html(response);
+                if (response.success) {
+                    $('#search-results').html(response.data);
+                } else {
+                    $('#search-results').html('&lt;div class="error"&gt;خطا در جستجو&lt;/div&gt;');
+                }
+            },
+            error: function() {
+                $('#search-results').html('&lt;div class="error"&gt;خطا در ارتباط با سرور&lt;/div&gt;');
             }
         });
-    });
-});</code></pre>
+    }
+});
+
+// پیاده‌سازی سمت سرور (PHP)
+/*
+add_action('wp_ajax_bwd_ajax_search', 'handle_ajax_search');
+add_action('wp_ajax_nopriv_bwd_ajax_search', 'handle_ajax_search');
+
+function handle_ajax_search() {
+    check_ajax_referer('bwd_nonce', 'nonce');
+    
+    $search_term = sanitize_text_field($_POST['search_term']);
+    $normalized_term = bwd_normalize_text($search_term);
+    
+    $args = array(
+        'post_type' => 'product',
+        'meta_query' => array(
+            array(
+                'key' => 'bwd_normalized_title',
+                'value' => $normalized_term,
+                'compare' => 'LIKE'
+            )
+        )
+    );
+    
+    $products = new WP_Query($args);
+    
+    if ($products->have_posts()) {
+        $output = '&lt;ul&gt;';
+        while ($products->have_posts()) {
+            $products->the_post();
+            $output .= '&lt;li&gt;' . get_the_title() . '&lt;/li&gt;';
+        }
+        $output .= '&lt;/ul&gt;';
+        wp_reset_postdata();
+        
+        wp_send_json_success($output);
+    } else {
+        wp_send_json_error('محصولی یافت نشد');
+    }
+}
+*/</code></pre>
                         </div>
                     </div>
                     <div class="bwd-example-section">
@@ -491,14 +616,46 @@ jQuery(document).ready(function($) {
                                 <span>کد PHP</span>
                                 <button class="bwd-copy-btn" data-copy="manual_normalize_example">کپی</button>
                             </div>
-                            <pre><code id="manual_normalize_example">// نرمالایز کردن دستی متن
+                            <pre><code id="manual_normalize_example">&lt;?php
+/**
+ * نرمالایز کردن دستی متن
+ * Manual text normalization
+ */
+
+// مثال 1: نرمالایز کردن یک متن
 $original_text = 'گوشی موبایل سامسونگ';
 $normalized_text = bwd_normalize_text($original_text);
-echo $normalized_text; // خروجی: گوشي موبايل سامسونگ
+echo 'متن اصلی: ' . $original_text . '<br>';
+echo 'متن نرمالایز: ' . $normalized_text;
+// خروجی: گوشي موبايل سامسونگ
 
-// نرمالایز کردن آرایه از متون
-$texts = ['گوشی موبایل', 'لپ تاپ', 'تبلت'];
-$normalized_texts = array_map('bwd_normalize_text', $texts);</code></pre>
+// مثال 2: نرمالایز کردن آرایه از متون
+$texts = [
+    'گوشی موبایل',
+    'لپ تاپ',
+    'تبلت'
+];
+
+$normalized_texts = array_map('bwd_normalize_text', $texts);
+
+foreach ($normalized_texts as $index => $normalized) {
+    echo 'متن ' . ($index + 1) . ': ' . $normalized . '<br>';
+}
+
+// مثال 3: استفاده در حلقه
+$products = get_posts(array(
+    'post_type' => 'product',
+    'numberposts' => 5
+));
+
+foreach ($products as $product) {
+    $title = get_the_title($product->ID);
+    $normalized_title = bwd_normalize_text($title);
+    
+    // ذخیره در متا فیلد
+    update_post_meta($product->ID, 'bwd_normalized_title', $normalized_title);
+}
+?&gt;</code></pre>
                         </div>
                     </div>
                     <div class="bwd-example-section">
@@ -508,25 +665,64 @@ $normalized_texts = array_map('bwd_normalize_text', $texts);</code></pre>
                                 <span>کد PHP</span>
                                 <button class="bwd-copy-btn" data-copy="woocommerce_search_example">کپی</button>
                             </div>
-                            <pre>
-                                <code id="woocommerce_search_example">// جستجو در محصولات WooCommerce
+                            <pre><code id="woocommerce_search_example">&lt;?php
+/**
+ * جستجو در محصولات WooCommerce با سرچ‌دون
+ * WooCommerce product search with SearchDoon
+ */
+
+// اضافه کردن فیلتر جستجو
 add_filter('woocommerce_product_query', 'bwd_woocommerce_search');
+
 function bwd_woocommerce_search($q) {
-    if (!is_admin() && $q->is_main_query()) {
-        if ($q->is_search()) {
-            $search_term = $q->get('s');
+    // فقط در فرانت‌اند و جستجو
+    if (!is_admin() && $q->is_main_query() && $q->is_search()) {
+        $search_term = $q->get('s');
+        
+        if (!empty($search_term)) {
             $normalized_term = bwd_normalize_text($search_term);
             
-            $q->set('meta_query', array(
+            // تنظیم متا کوئری برای جستجو در فیلدهای نرمالایز
+            $meta_query = array(
+                'relation' => 'OR',
                 array(
                     'key' => 'bwd_normalized_title',
                     'value' => $normalized_term,
                     'compare' => 'LIKE'
+                ),
+                array(
+                    'key' => 'bwd_normalized_content',
+                    'value' => $normalized_term,
+                    'compare' => 'LIKE'
                 )
-            ));
+            );
+            
+            $q->set('meta_query', $meta_query);
+            
+            // غیرفعال کردن جستجوی پیش‌فرض در عنوان
+            $q->set('s', '');
         }
     }
-}</code></pre>
+    
+    return $q;
+}
+
+// اضافه کردن فیلتر برای صفحه نتایج جستجو
+add_action('woocommerce_before_shop_loop', 'bwd_show_search_info');
+
+function bwd_show_search_info() {
+    if (is_search()) {
+        global $wp_query;
+        $found_posts = $wp_query->found_posts;
+        
+        if ($found_posts > 0) {
+            echo '<div class="search-info">';
+            echo '<p>تعداد نتایج یافت شده: ' . $found_posts . '</p>';
+            echo '</div>';
+        }
+    }
+}
+?&gt;</code></pre>
                         </div>
                     </div>
                     <div class="bwd-tips-section">

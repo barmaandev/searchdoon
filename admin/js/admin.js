@@ -568,8 +568,8 @@ jQuery(document).ready(function ($) {
             }
         }
 
-        // Ctrl/Cmd + R to reset progress
-        if ((e.ctrlKey || e.metaKey) && e.keyCode === 82) {
+        // Ctrl/Cmd + Shift + R to reset progress (to avoid conflict with page reload)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.keyCode === 82) {
             $('#bwd-reset-progress').click();
         }
     });

@@ -45,6 +45,206 @@ font-family: 'Vazirmatn', sans-serif;
     box-shadow: 6px 6px 54px rgba(0, 0, 0, .05);
 }
 
+/* Tab Navigation */
+
+/* Headers */
+.wbdn-wrapper h1,
+.wbdn-wrapper h2 {
+    color: #202224;
+    font-size: 24px;
+}
+
+
+
+.wbdn-tab-wrapper,
+.wrap h2.wbdn-tab-wrapper,
+h1.wbdn-tab-wrapper {
+    border: 0;
+}
+
+/* Card Layouts */
+
+.wbdn-wrapper .wbdn-tab-wrapper {
+    padding: 5px !important;
+    background: #fff;
+    border-radius: 15px;
+    margin-bottom: 20px !important;
+    box-shadow: 6px 6px 54px rgba(0, 0, 0, .05);
+}
+
+
+.wbdn-wrapper .wbdn-tab-nav-btn {
+    display: inline-flex;
+    border: 0;
+    border-bottom: none;
+    margin-right: .5em;
+    padding: 15px 30px;
+    font-size: 14px;
+    line-height: normal;
+    font-weight: 600;
+    background: transparent;
+    color: #50575e;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 15px;
+    border-bottom: 0;
+
+}
+
+.wbdn-wrapper .wbdn-tab-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.wbdn-wrapper .wbdn-tab-nav-btn.active,
+.wbdn-wrapper .wbdn-tab-nav-btn.active:focus,
+.wbdn-wrapper .wbdn-tab-nav-btn.active:focus:active,
+.wbdn-wrapper .wbdn-tab-nav-btn.active:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* Tab Navigation */
+
+.wbdn-tab-nav-btn {
+    padding: 12px 24px;
+    background: #f8f9fa;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-left: 5px;
+    border-radius: 8px 8px 0 0;
+}
+
+.wbdn-tab-nav-btn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+
+/* Tab Content */
+.wbdn-tab-content {
+    display: none;
+}
+
+.wbdn-tab-content.active {
+    display: block;
+}
+
+/* Guide Card Styling */
+.bwd-guide-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 6px 6px 54px rgba(0, 0, 0, .05);
+}
+
+.bwd-example-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.bwd-example-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.bwd-example-section h4 {
+    color: #495057;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Code Example Styling */
+.bwd-code-example {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.bwd-code-header {
+    background: #e9ecef;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.bwd-code-header span {
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+}
+
+.bwd-copy-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.bwd-copy-btn:hover {
+    background: #0056b3;
+}
+
+.bwd-copy-btn:active {
+    background: #004085;
+}
+
+.bwd-code-example pre {
+    margin: 0;
+    padding: 20px;
+    background: #f8f9fa;
+    overflow-x: auto;
+}
+
+.bwd-code-example code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #212529;
+    white-space: pre;
+}
+
+/* Tips Section */
+.bwd-tips-section {
+    background: #e7f3ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.bwd-tips-section h4 {
+    color: #0056b3;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.bwd-tips-section ul {
+    margin: 0;
+    padding-right: 20px;
+}
+
+.bwd-tips-section li {
+    margin-bottom: 8px;
+    color: #495057;
+    line-height: 1.6;
+}
+
 
 /* Headers */
 .bwd-ppb-main h1,

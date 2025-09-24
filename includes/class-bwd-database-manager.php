@@ -33,7 +33,7 @@ class BWD_Database_Manager {
     private function perform_cleanup_orphaned_meta_data() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'postmeta';
-        $normalized_meta_key = '_normalized_product_data';
+        $normalized_meta_key = '_searchdoon_data';
 
         // Find orphaned meta data (posts that have the meta key but no corresponding post)
         $orphaned_meta_query = $wpdb->prepare(

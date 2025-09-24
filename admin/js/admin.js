@@ -1,5 +1,34 @@
 jQuery(document).ready(function($) {
     'use strict';
+
+	// Tabs: handle navigation and deep-linking
+	(function initTabs() {
+		function activateTab(tab) {
+			$('.wbdn-tab-nav-btn').removeClass('active');
+			$('.wbdn-tab-nav-btn[data-tab="' + tab + '"]').addClass('active');
+			$('.wbdn-tab-content').removeClass('active');
+			$('#wbdn-tab-' + tab).addClass('active');
+		}
+
+		// Click handlers
+		$(document).on('click', '.wbdn-tab-nav-btn', function() {
+			var tab = $(this).data('tab');
+			activateTab(tab);
+			// Update URL hash for persistence
+			if (history.replaceState) {
+				history.replaceState(null, '', window.location.pathname + window.location.search + '#tab=' + tab);
+			} else {
+				window.location.hash = 'tab=' + tab;
+			}
+		});
+
+		// On load: open tab from hash if provided
+		var hash = window.location.hash || '';
+		var match = hash.match(/tab=([a-zA-Z0-9_-]+)/);
+		if (match && match[1]) {
+			activateTab(match[1]);
+		}
+	})();
     
     // Batch processing
     $('#bwd-start-batch').on('click', function() {

@@ -5,7 +5,7 @@ class BWD_Batch_Processor {
 
     private $is_processing = false;
     private $batch_size = 50;
-    private $normalized_meta_key = '_normalized_product_data';
+    private $normalized_meta_key = '_searchdoon_data';
     private $database_manager;
     private $persian_product_normalizer;
 

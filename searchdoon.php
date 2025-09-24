@@ -4,7 +4,7 @@
  * Plugin Name: SearchDoon
  * Plugin URI: https://barmaan.dev
  * Description: برای حل مشکلات جستجو در متن فارسی در وردپرس طراحی شده است. این افزونه مشکلات جستجو در متن فارسی را حل می‌کند و فیلدهای متا برای بهبود جستجو اضافه می‌کند.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Barmaan Shokoohi
  * Author URI: https://barmaan.dev
  * Text Domain: searchdoon
@@ -222,8 +222,10 @@ class BWD_SearchDoon
 
         // Check if product already normalized and reprocessing is disabled
         $existing_data = get_post_meta($post_id, $this->normalized_meta_key, true);
-        if ($existing_data && !$this->get_cached_option('bwd_reprocess_existing', false)) {
-            return; // Skip if already normalized and reprocessing is disabled
+        // Force reprocess when user explicitly clicks Update in admin edit screen
+        $is_admin_manual_update = is_admin() && isset($_POST['action']) && $_POST['action'] === 'editpost';
+        if ($existing_data && !$this->get_cached_option('bwd_reprocess_existing', false) && !$is_admin_manual_update) {
+            return; // Skip if already normalized and reprocessing is disabled, unless it's a manual admin update
         }
 
         // Hook before normalization

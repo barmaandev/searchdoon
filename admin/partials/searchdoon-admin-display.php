@@ -102,7 +102,7 @@
                             <button type="button" id="bwd-cleanup-stats" class="button">
                                 پاکسازی و محاسبه مجدد
                             </button>
-                            <button type="button" id="bwd-reset-normalized" class="button" style="float:<?php echo is_rtl() ? 'left' : 'right'; ?>;">
+                            <button type="button" id="bwd-reset-normalized" class="button">
                                 حذف داده‌های نرمالایز همه محصولات
                             </button>
                         </div>

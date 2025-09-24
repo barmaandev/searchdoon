@@ -126,6 +126,11 @@ class BWD_SearchDoon
         // Enable normalize on product save
         add_action('save_post', array($this, 'normalize_and_save_product_data'), 10, 2);
 
+        // Regenerate normalized data when a product is duplicated in WooCommerce
+        add_action('woocommerce_product_duplicate', array($this, 'handle_product_duplicate'), 10, 2);
+        // Support popular Duplicate Post plugin (optional)
+        add_action('after_duplicate_post', array($this, 'handle_after_duplicate_post'), 10, 2);
+
         // Batch processing endpoints
         add_action('wp_ajax_bwd_batch_update', array($this->batch_processor, 'ajax_batch_update'));
         add_action('wp_ajax_bwd_get_progress', array($this->batch_processor, 'ajax_get_progress'));
@@ -140,6 +145,7 @@ class BWD_SearchDoon
         add_action('wp_ajax_bwd_refresh_logs', array($this, 'ajax_refresh_logs'));
         add_action('wp_ajax_bwd_clear_logs', array($this, 'ajax_clear_logs'));
         add_action('wp_ajax_bwd_reprocess_product', array($this, 'ajax_reprocess_product'));
+        add_action('wp_ajax_bwd_reset_normalized', array($this, 'ajax_reset_normalized'));
         // add_action('wp_ajax_bwd_fix_activation', array($this, 'ajax_fix_activation'));
         add_action('wp_ajax_bwd_cleanup_stats', array($this, 'ajax_cleanup_stats'));
 
@@ -467,6 +473,59 @@ class BWD_SearchDoon
         wp_send_json_success('لاگ‌ها با موفقیت پاک شدند.');
     }
 
+    public function ajax_reset_normalized()
+    {
+        check_ajax_referer('bwd_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_die('Unauthorized');
+        }
+
+        global $wpdb;
+
+        // Delete all normalized meta rows
+        $meta_key = $this->normalized_meta_key;
+        $table = $wpdb->postmeta;
+
+        // Count rows before delete for reporting
+        $count_query = $wpdb->prepare(
+            "SELECT COUNT(*) FROM {$table} WHERE meta_key = %s",
+            $meta_key
+        );
+        $rows_before = (int) $wpdb->get_var($count_query);
+
+        // Perform deletion
+        $deleted = $wpdb->query(
+            $wpdb->prepare("DELETE FROM {$table} WHERE meta_key = %s", $meta_key)
+        );
+
+        // Recompute stats
+        // Count total published, non auto-draft products
+        add_filter('posts_where', array($this, 'exclude_auto_drafts_from_batch'), 10, 2);
+        $total_products = count(get_posts(array(
+            'post_type' => 'product',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'fields' => 'ids'
+        )));
+        remove_filter('posts_where', array($this, 'exclude_auto_drafts_from_batch'), 10, 2);
+
+        // Update options
+        $this->set_cached_option('bwd_processed_products', 0);
+        $this->set_cached_option('bwd_products_needing_normalization', max(0, $total_products));
+        $this->set_cached_option('bwd_batch_update_completed', false);
+
+        // Log reset action
+        $this->log_normalization(0, 'reset_normalized');
+
+        wp_send_json_success(array(
+            'message' => 'تمام داده‌های نرمالایز محصولات حذف شد.',
+            'deleted_meta_rows' => (int) $deleted,
+            'previous_meta_rows' => $rows_before,
+            'total_products' => $total_products
+        ));
+    }
+
     public function ajax_reprocess_product()
     {
         check_ajax_referer('bwd_nonce', 'nonce');
@@ -592,6 +651,53 @@ class BWD_SearchDoon
         global $wpdb;
         $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_status != %s", 'auto-draft');
         return $where;
+    }
+
+    /**
+     * Handle WooCommerce product duplication to ensure _searchdoon_data is regenerated for the new product
+     */
+    public function handle_product_duplicate($duplicate, $product)
+    {
+        // $duplicate is a WC_Product object
+        if (!is_object($duplicate) || !method_exists($duplicate, 'get_id')) {
+            return;
+        }
+
+        $new_product_id = (int) $duplicate->get_id();
+        if ($new_product_id <= 0) {
+            return;
+        }
+
+        // Remove copied normalized meta from the new product
+        delete_post_meta($new_product_id, $this->normalized_meta_key);
+
+        // Regenerate immediately using current post data
+        $new_post = get_post($new_product_id);
+        if ($new_post && $new_post->post_type === 'product') {
+            $this->normalize_and_save_product_data($new_product_id, $new_post);
+        }
+    }
+
+    /**
+     * Handle generic post duplication (e.g., Duplicate Post plugin)
+     */
+    public function handle_after_duplicate_post($duplicate, $post)
+    {
+        if (!$duplicate || !isset($duplicate->ID)) {
+            return;
+        }
+
+        if ($duplicate->post_type !== 'product') {
+            return;
+        }
+
+        $new_product_id = (int) $duplicate->ID;
+
+        // Remove copied normalized meta from the new product
+        delete_post_meta($new_product_id, $this->normalized_meta_key);
+
+        // Regenerate
+        $this->normalize_and_save_product_data($new_product_id, $duplicate);
     }
 
     private function log_normalization($post_id, $type)

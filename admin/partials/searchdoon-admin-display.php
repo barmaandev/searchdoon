@@ -102,6 +102,9 @@
                             <button type="button" id="bwd-cleanup-stats" class="button">
                                 پاکسازی و محاسبه مجدد
                             </button>
+                            <button type="button" id="bwd-reset-normalized" class="button" style="float:<?php echo is_rtl() ? 'left' : 'right'; ?>;">
+                                حذف داده‌های نرمالایز همه محصولات
+                            </button>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -132,7 +135,7 @@
 
             <!-- Manual Normalization Tab Content -->
             <div id="wbdn-tab-manual" class="wbdn-tab-content">
-                
+
                 <!-- Manual Normalization -->
                 <div class="wbdn-section-box bwd-manual-card">
                     <h3>نرمالایز کردن محصول خاص</h3>
@@ -153,7 +156,7 @@
 
             <!-- Settings Tab Content -->
             <div id="wbdn-tab-settings" class="wbdn-tab-content">
-                
+
                 <!-- Test Normalization -->
                 <div class="wbdn-section-box bwd-test-card">
                     <h3>تست نرمالایز کردن</h3>
@@ -280,7 +283,7 @@
 
             <!-- Recent Activity Tab Content -->
             <div id="wbdn-tab-activity" class="wbdn-tab-content">
-                
+
                 <!-- Recent Activity -->
                 <div class="wbdn-section-box bwd-activity-card">
                     <h3>لاگ فعالیت‌ها</h3>
